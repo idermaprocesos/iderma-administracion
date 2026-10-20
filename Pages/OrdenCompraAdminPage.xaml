@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="IdermaAdministracion.Pages.OrdenCompraAdminPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Padding="28,20" RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Spacing="4">
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Orden de compra" />
+            <TextBlock
+                Opacity="0.8"
+                Text="Sección aparte de la orden de servicio. Aquí se arman compras de bienes, con borrador, revisión, aprobación e impresión."
+                TextWrapping="Wrap" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="8">
+            <Button Click="Nueva_Click" Content="Nueva orden de compra" Style="{StaticResource AccentButtonStyle}" />
+            <Button Click="Borradores_Click" Content="Editar borradores" />
+            <Button Click="Anteriores_Click" Content="Órdenes anteriores" />
+        </StackPanel>
+        <TextBlock
+            Grid.Row="2"
+            Opacity="0.7"
+            Text="La orden de servicio, para ampliar contratos por meses, está en su propia sección del menú."
+            TextWrapping="Wrap" />
+    </Grid>
+</Page>

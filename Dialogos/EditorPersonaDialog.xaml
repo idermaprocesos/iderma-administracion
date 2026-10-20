@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentDialog
+    x:Class="IdermaAdministracion.Dialogos.EditorPersonaDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    CloseButtonText="Cancelar"
+    DefaultButton="Primary"
+    PrimaryButtonClick="Guardar_Click"
+    PrimaryButtonText="Guardar">
+    <ContentDialog.Resources>
+        <x:Double x:Key="ContentDialogMaxWidth">1040</x:Double>
+        <x:Double x:Key="ContentDialogMaxHeight">840</x:Double>
+    </ContentDialog.Resources>
+
+    <ScrollViewer
+        MaxHeight="640"
+        HorizontalScrollBarVisibility="Disabled"
+        HorizontalScrollMode="Disabled"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel Width="980" Spacing="12">
+            <InfoBar
+                x:Name="ErrorAviso"
+                IsClosable="False"
+                IsOpen="False"
+                Severity="Error"
+                Title="Revisa el formulario" />
+
+            <Grid ColumnSpacing="12" RowSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Identidad" />
+                        <Grid ColumnSpacing="12" RowSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="Nombres" MinWidth="0" Header="Nombres" PlaceholderText="Nombre" />
+                            <TextBox x:Name="Apellidos" Grid.Column="1" MinWidth="0" Header="Apellidos" PlaceholderText="Apellidos" />
+                            <TextBox x:Name="Documento" Grid.Row="1" MinWidth="0" Header="Documento" PlaceholderText="DNI" />
+                            <TextBox x:Name="Telefono" Grid.Row="1" Grid.Column="1" MinWidth="0" Header="Teléfono" PlaceholderText="999 000 000" />
+                            <TextBox x:Name="Correo" Grid.Row="2" Grid.ColumnSpan="2" MinWidth="0" Header="Correo" PlaceholderText="nombre@iderma.ejemplo" />
+                        </Grid>
+                        <StackPanel x:Name="BloqueMedico" Spacing="10" Visibility="Collapsed">
+                            <TextBlock Opacity="0.75" Text="Datos del médico" />
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="Colegiatura" MinWidth="0" Header="Colegiatura" PlaceholderText="CMP" />
+                                <TextBox x:Name="Especialidad" Grid.Column="1" MinWidth="0" Header="Especialidad" />
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Puesto y contrato" />
+                        <Grid ColumnSpacing="12" RowSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBox x:Name="Cargo" MinWidth="0" Header="Cargo" />
+                            <ComboBox x:Name="Area" Grid.Column="1" MinWidth="0" HorizontalAlignment="Stretch" Header="Área" />
+                            <ComboBox x:Name="Sede" Grid.Row="1" MinWidth="0" HorizontalAlignment="Stretch" Header="Lugar de trabajo" />
+                            <ComboBox x:Name="Jornada" Grid.Row="1" Grid.Column="1" MinWidth="0" HorizontalAlignment="Stretch" Header="Jornada" />
+                            <TextBox x:Name="NumeroContrato" Grid.Row="2" MinWidth="0" Header="Número de contrato" />
+                            <ComboBox x:Name="TipoContrato" Grid.Row="2" Grid.Column="1" MinWidth="0" HorizontalAlignment="Stretch" Header="Tipo de contrato" />
+                            <CalendarDatePicker x:Name="FechaIngreso" Grid.Row="3" MinWidth="0" Header="Fecha de ingreso" HorizontalAlignment="Stretch" DateChanged="FechaIngreso_DateChanged" />
+                            <ComboBox x:Name="Duracion" Grid.Row="3" Grid.Column="1" MinWidth="0" HorizontalAlignment="Stretch" Header="Duración" SelectionChanged="Duracion_SelectionChanged" />
+                        </Grid>
+                        <Border Padding="12" Background="{ThemeResource SubtleFillColorSecondaryBrush}" CornerRadius="6">
+                            <TextBlock x:Name="AvisoPlazo" TextWrapping="Wrap" />
+                        </Border>
+                        <CheckBox x:Name="SeRetiro" Checked="Retiro_Changed" Content="Marcar como retirado" Unchecked="Retiro_Changed" />
+                        <Grid x:Name="BloqueRetiro" ColumnSpacing="12" Visibility="Collapsed">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <CalendarDatePicker x:Name="FechaRetiro" MinWidth="0" Header="Fecha de retiro" HorizontalAlignment="Stretch" />
+                            <TextBox x:Name="MotivoRetiro" Grid.Column="1" MinWidth="0" Header="Motivo de retiro" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="10">
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Horario por día" />
+                        <TextBlock Opacity="0.75" Text="Elige un horario para los días marcados, o ajusta cada día." TextWrapping="Wrap" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Click="PresetHorario_Click" Content="9 a 6" />
+                            <Button Click="PresetHorario_Click" Content="9 a 7" />
+                            <Button Click="PresetHorario_Click" Content="8 a 6" />
+                            <Button Click="PresetHorario_Click" Content="8 a 5" />
+                        </StackPanel>
+                        <StackPanel x:Name="DiasHorario" Spacing="6" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="2" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Pago" />
+                        <Grid ColumnSpacing="12" RowSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <NumberBox x:Name="Sueldo" MinWidth="0" HorizontalAlignment="Stretch" Header="Sueldo mensual (S/)" Minimum="0" SpinButtonPlacementMode="Compact" />
+                            <ComboBox x:Name="Modalidad" Grid.Column="1" MinWidth="0" HorizontalAlignment="Stretch" Header="Modalidad" />
+                            <TextBox x:Name="CodigoPago" Grid.Row="1" MinWidth="0" Header="Código de planilla o recibo" />
+                            <TextBox x:Name="Banco" Grid.Row="1" Grid.Column="1" MinWidth="0" Header="Banco" />
+                            <TextBox x:Name="Cuenta" Grid.Row="2" Grid.ColumnSpan="2" MinWidth="0" Header="Cuenta" PlaceholderText="Número de cuenta" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Uso de imagen" />
+                        <ToggleSwitch x:Name="AceptaImagen" Header="Autoriza su imagen para marketing" OffContent="No autoriza" OnContent="Sí autoriza" Toggled="Imagen_Toggled" />
+                        <StackPanel x:Name="BloqueImagen" Spacing="10" Visibility="Collapsed">
+                            <Grid ColumnSpacing="12" RowSpacing="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBox x:Name="Canales" MinWidth="0" Header="Canales autorizados" PlaceholderText="Web, redes, sala" TextWrapping="Wrap" />
+                                <TextBox x:Name="Restricciones" Grid.Column="1" MinWidth="0" Header="Restricciones" PlaceholderText="Qué no se puede usar" TextWrapping="Wrap" />
+                                <CalendarDatePicker x:Name="FechaConsentimiento" Grid.Row="1" MinWidth="0" Header="Fecha de aceptación" HorizontalAlignment="Stretch" />
+                                <CalendarDatePicker x:Name="VencimientoImagen" Grid.Row="1" Grid.Column="1" MinWidth="0" Header="Vencimiento" HorizontalAlignment="Stretch" />
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource TarjetaEstilo}">
+                    <TextBox
+                        x:Name="Observaciones"
+                        Header="Observaciones internas"
+                        AcceptsReturn="True"
+                        MinHeight="72"
+                        PlaceholderText="Notas que solo ve administración"
+                        TextWrapping="Wrap" />
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

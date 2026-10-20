@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="IdermaAdministracion.Pages.FichaPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:IdermaAdministracion.Controls">
+
+    <Grid>
+        <ScrollViewer Padding="28,20,28,32" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+            <StackPanel x:Name="FichaRaiz" MaxWidth="1080" HorizontalAlignment="Center" Spacing="12">
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <PersonPicture
+                        Width="72"
+                        Height="72"
+                        VerticalAlignment="Center"
+                        DisplayName="{Binding NombreCompleto}" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="2">
+                        <HyperlinkButton Padding="0" Click="Volver_Click" Content="Volver al listado" />
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{Binding NombreCompleto}" />
+                        <TextBlock Opacity="0.8" Text="{Binding SubtituloFicha}" TextWrapping="Wrap" />
+                        <StackPanel Margin="0,8,0,0" Orientation="Horizontal" Spacing="8">
+                            <Button Click="Editar_Click" Content="Editar información" />
+                            <Button Click="Informe_Click" Content="Generar informe" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <InfoBar x:Name="AvisoEstado" IsClosable="False" IsOpen="False" />
+                <InfoBar x:Name="AvisoVencimiento" IsClosable="False" IsOpen="False" Severity="Warning" />
+
+                <TextBlock Margin="0,8,0,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="Identidad" />
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <Grid ColumnSpacing="28">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <controls:CampoDato Etiqueta="Rol" Valor="{Binding RolTexto}" />
+                            <controls:CampoDato Etiqueta="Documento" Valor="{Binding Documento}" />
+                            <controls:CampoDato Etiqueta="Correo" Valor="{Binding Correo}" />
+                            <StackPanel x:Name="BloqueMedico" Visibility="Collapsed">
+                                <controls:CampoDato Etiqueta="Colegiatura" Valor="{Binding ColegiaturaTexto}" />
+                                <controls:CampoDato Etiqueta="Especialidad" Valor="{Binding EspecialidadTexto}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <controls:CampoDato Etiqueta="Teléfono" Valor="{Binding Telefono}" />
+                            <controls:CampoDato Etiqueta="Lugar de trabajo" Valor="{Binding Contrato.Sede}" />
+                            <controls:CampoDato Etiqueta="Área" Valor="{Binding Contrato.Area}" />
+                            <controls:CampoDato Etiqueta="Cargo" Valor="{Binding Contrato.Cargo}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <TextBlock Margin="0,8,0,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="Contrato y vinculación" />
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <Grid ColumnSpacing="28">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <controls:CampoDato Etiqueta="Número de contrato" Valor="{Binding Contrato.NumeroContrato}" />
+                            <controls:CampoDato Etiqueta="Tipo de contrato" Valor="{Binding Contrato.TipoContrato}" />
+                            <controls:CampoDato Etiqueta="Jornada" Valor="{Binding Contrato.Jornada}" />
+                            <controls:CampoDato Etiqueta="Horario" Valor="{Binding Contrato.Horario}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <controls:CampoDato Etiqueta="Fecha de ingreso" Valor="{Binding Contrato.IngresoTexto}" />
+                            <controls:CampoDato Etiqueta="¿Se retiró?" Valor="{Binding Contrato.SeRetiroTexto}" />
+                            <controls:CampoDato Etiqueta="Motivo de retiro" Valor="{Binding Contrato.MotivoRetiroTexto}" />
+                            <controls:CampoDato Etiqueta="Duración" Valor="{Binding Contrato.PlazoTexto}" />
+                            <controls:CampoDato Etiqueta="Fin de contrato" Valor="{Binding Contrato.FinContratoTexto}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <TextBlock Margin="0,8,0,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="Sueldo, planilla y honorarios" />
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Opacity="{Binding Contrato.OpacidadPlanilla}" Style="{StaticResource TarjetaEstilo}">
+                        <StackPanel Spacing="4">
+                            <TextBlock Opacity="0.7" Text="Planilla" />
+                            <TextBlock FontSize="22" FontWeight="SemiBold" Text="{Binding Contrato.PlanillaValor}" TextWrapping="Wrap" />
+                            <TextBlock Opacity="0.75" Text="{Binding Contrato.PlanillaEstado}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Opacity="{Binding Contrato.OpacidadHonorarios}" Style="{StaticResource TarjetaEstilo}">
+                        <StackPanel Spacing="4">
+                            <TextBlock Opacity="0.7" Text="Recibo por honorarios" />
+                            <TextBlock FontSize="22" FontWeight="SemiBold" Text="{Binding Contrato.HonorariosValor}" TextWrapping="Wrap" />
+                            <TextBlock Opacity="0.75" Text="{Binding Contrato.HonorariosEstado}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <Grid ColumnSpacing="28">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <controls:CampoDato Etiqueta="Sueldo mensual" Valor="{Binding Contrato.SueldoTexto}" />
+                            <controls:CampoDato Etiqueta="Modalidad de pago" Valor="{Binding Contrato.ModalidadTexto}" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <controls:CampoDato Etiqueta="Banco" Valor="{Binding Contrato.BancoTexto}" />
+                            <controls:CampoDato Etiqueta="Cuenta" Valor="{Binding Contrato.CuentaTexto}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <TextBlock Margin="0,8,0,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="Documentos por firmar" />
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="10">
+                        <TextBlock x:Name="ResumenFirmas" FontWeight="SemiBold" TextWrapping="Wrap" />
+                        <StackPanel x:Name="ListaFirmas" Spacing="8" />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Margin="0,8,0,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="Uso de imagen para marketing" />
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="4">
+                        <TextBlock FontSize="22" FontWeight="SemiBold" Text="{Binding Contrato.AceptaImagenTexto}" TextWrapping="Wrap" />
+                        <Grid Margin="0,12,0,0" ColumnSpacing="28">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <controls:CampoDato Etiqueta="Fecha de aceptación" Valor="{Binding Contrato.FechaConsentimientoTexto}" />
+                                <controls:CampoDato Etiqueta="Vencimiento" Valor="{Binding Contrato.VencimientoImagenTexto}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <controls:CampoDato Etiqueta="Canales autorizados" Valor="{Binding Contrato.CanalesTexto}" />
+                                <controls:CampoDato Etiqueta="Restricciones" Valor="{Binding Contrato.RestriccionesTexto}" />
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Margin="0,8,0,0" Style="{StaticResource SubtitleTextBlockStyle}" Text="Observaciones" />
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <TextBlock Text="{Binding Contrato.Observaciones}" TextWrapping="Wrap" />
+                </Border>
+
+                <TextBlock
+                    Opacity="0.65"
+                    Text="Registro de ejemplo para administración. No reemplaza el contrato firmado ni la planilla oficial."
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel
+            x:Name="Vacio"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="8"
+            Visibility="Collapsed">
+            <TextBlock Text="No se encontró este registro." />
+            <HyperlinkButton Click="Volver_Click" Content="Volver" />
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="IdermaAdministracion.Pages.AnalisisPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer Padding="28,20,28,32" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+        <StackPanel MaxWidth="1080" HorizontalAlignment="Stretch" Spacing="16">
+            <StackPanel Spacing="4">
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Análisis de personal" />
+                <TextBlock
+                    Opacity="0.8"
+                    Text="Gráficas calculadas con los trabajadores, doctores, contratos, firmas, postulaciones y permisos cargados."
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <Grid x:Name="Indicadores" ColumnSpacing="12" />
+
+            <Grid ColumnSpacing="12" RowSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="Personal activo por área" />
+                        <StackPanel x:Name="PorArea" Spacing="8" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="Duración de los contratos activos" />
+                        <StackPanel x:Name="PorPlazo" Spacing="8" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="Documentos firmados" />
+                        <TextBlock Opacity="0.7" Text="Cuántas personas ya firmaron cada documento." TextWrapping="Wrap" />
+                        <StackPanel x:Name="PorFirmas" Spacing="8" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="Postulaciones por etapa" />
+                        <StackPanel x:Name="PorPostulacion" Spacing="8" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="Permisos por motivo" />
+                        <StackPanel x:Name="PorPermiso" Spacing="8" />
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="Pago y vigencia" />
+                        <TextBlock Opacity="0.7" Text="Modalidad de pago y estado del plazo." TextWrapping="Wrap" />
+                        <StackPanel x:Name="PorPago" Spacing="8" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="IdermaAdministracion.Pages.OrganigramaPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer
+        Padding="28,20,28,32"
+        HorizontalScrollBarVisibility="Auto"
+        HorizontalScrollMode="Auto"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel MinWidth="980" HorizontalAlignment="Center" Spacing="12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Spacing="4">
+                    <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Organigrama" />
+                    <TextBlock
+                        Opacity="0.8"
+                        Text="Gerente general, con administración, contabilidad (en línea punteada) y marketing y ventas."
+                        TextWrapping="Wrap" />
+                </StackPanel>
+                <Button
+                    Grid.Column="1"
+                    VerticalAlignment="Top"
+                    Click="ExportarPdf_Click"
+                    Content="Exportar PDF" />
+            </Grid>
+            <StackPanel x:Name="Lienzo" Spacing="0" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

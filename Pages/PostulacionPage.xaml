@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="IdermaAdministracion.Pages.PostulacionPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid>
+        <ScrollViewer Padding="28,20,28,32" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+            <StackPanel x:Name="FichaRaiz" MaxWidth="980" HorizontalAlignment="Center" Spacing="16">
+                <StackPanel Spacing="8">
+                    <HyperlinkButton Padding="0" Click="Volver_Click" Content="Volver a postulaciones" />
+                    <TextBlock x:Name="Nombre" Style="{StaticResource TitleTextBlockStyle}" />
+                    <TextBlock x:Name="Puesto" Opacity="0.8" TextWrapping="Wrap" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button Click="EditarDatos_Click" Content="Editar datos" />
+                        <Button Click="Eliminar_Click" Content="Eliminar" />
+                        <Button x:Name="BotonPersonal" Click="PasarPersonal_Click" Content="Pasar a personal" Visibility="Collapsed" />
+                    </StackPanel>
+                </StackPanel>
+
+                <ComboBox
+                    x:Name="Proceso"
+                    HorizontalAlignment="Stretch"
+                    Header="En qué proceso está"
+                    SelectionChanged="Proceso_SelectionChanged">
+                    <ComboBoxItem Content="Contacto · contactarlo" />
+                    <ComboBoxItem Content="Reunión · agendar reunión" />
+                    <ComboBoxItem Content="Conocimientos · evaluación" />
+                    <ComboBoxItem Content="Primer día laboral" />
+                    <ComboBoxItem Content="Contratado" />
+                </ComboBox>
+                <TextBlock
+                    Opacity="0.7"
+                    Text="Puedes dejarlo en cualquier paso: contacto, reunión, evaluación, primer día o contratado. Los anteriores quedan superados y ese paso queda abierto para registrar el resultado."
+                    TextWrapping="Wrap" />
+
+                <Border Padding="28,24,28,20" Background="#171717" CornerRadius="16">
+                    <StackPanel x:Name="PasosHost" />
+                </Border>
+
+                <InfoBar x:Name="AvisoEstado" IsClosable="False" IsOpen="False" />
+
+                <Border x:Name="PanelPaso" Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock x:Name="TituloPaso" Style="{StaticResource SubtitleTextBlockStyle}" />
+                        <TextBlock x:Name="DetallePaso" Opacity="0.8" TextWrapping="Wrap" />
+                        <CalendarDatePicker
+                            x:Name="FechaPaso"
+                            Header="Fecha del paso"
+                            PlaceholderText="Elegir fecha" />
+                        <RadioButtons x:Name="OpcionesPaso" Header="Resultado" />
+                        <Button
+                            HorizontalAlignment="Left"
+                            Click="Registrar_Click"
+                            Content="Guardar resultado" />
+                        <InfoBar
+                            x:Name="AvisoFormulario"
+                            IsClosable="True"
+                            IsOpen="False"
+                            Severity="Warning" />
+                    </StackPanel>
+                </Border>
+
+                <TextBox
+                    x:Name="Nota"
+                    Header="Nota"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    MinHeight="80"
+                    PlaceholderText="Disponibilidad, observaciones de la llamada o de la reunión"
+                    LostFocus="Nota_LostFocus" />
+
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Registro de la postulación" />
+                <StackPanel x:Name="Historial" Spacing="8" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel
+            x:Name="Vacio"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Spacing="8"
+            Visibility="Collapsed">
+            <TextBlock Text="No se encontró esta postulación." />
+            <HyperlinkButton Click="Volver_Click" Content="Volver" />
+        </StackPanel>
+    </Grid>
+</Page>

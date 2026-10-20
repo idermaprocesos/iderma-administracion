@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="IdermaAdministracion.Pages.PostulacionesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:model="using:IdermaAdministracion.Models"
+    NavigationCacheMode="Enabled">
+
+    <Grid Padding="28,20,28,20" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Spacing="4">
+                <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Postulaciones" />
+                <TextBlock
+                    x:Name="Subtitulo"
+                    Opacity="0.8"
+                    Text="Cada postulante recorre contacto, reunión, evaluación y primer día laboral."
+                    TextWrapping="Wrap" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Top">
+                <Button Click="NuevoPuesto_Click" Content="Nuevo puesto" />
+                <Button Click="Agregar_Click" Content="Nueva postulación" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnSpacing="12" RowSpacing="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <AutoSuggestBox
+                x:Name="BuscarBox"
+                Grid.ColumnSpan="2"
+                PlaceholderText="Buscar nombre, puesto, área o documento"
+                TextChanged="BuscarBox_TextChanged">
+                <AutoSuggestBox.QueryIcon>
+                    <SymbolIcon Symbol="Find" />
+                </AutoSuggestBox.QueryIcon>
+            </AutoSuggestBox>
+            <ComboBox
+                x:Name="FiltroProceso"
+                Grid.Row="1"
+                HorizontalAlignment="Stretch"
+                Header="Proceso"
+                SelectedIndex="0"
+                SelectionChanged="Filtro_SelectionChanged">
+                <ComboBoxItem Content="Todos" />
+                <ComboBoxItem Content="Por contactar" />
+                <ComboBoxItem Content="Contacto" />
+                <ComboBoxItem Content="Reunión" />
+                <ComboBoxItem Content="Conocimientos" />
+                <ComboBoxItem Content="Primer día" />
+                <ComboBoxItem Content="No continuó" />
+                <ComboBoxItem Content="Contratado" />
+            </ComboBox>
+            <ComboBox
+                x:Name="FiltroArea"
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                Header="Área"
+                SelectedIndex="0"
+                SelectionChanged="Filtro_SelectionChanged" />
+        </Grid>
+
+        <Grid Grid.Row="2" ColumnSpacing="12" RowSpacing="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+                <ComboBox
+                    x:Name="EstadoMasivo"
+                    MinWidth="280"
+                    HorizontalAlignment="Stretch"
+                    Header="Nuevo estado de postulación"
+                    SelectedIndex="0">
+                    <ComboBoxItem Content="Contacto" />
+                    <ComboBoxItem Content="Reunión" />
+                    <ComboBoxItem Content="Conocimientos" />
+                    <ComboBoxItem Content="Primer día" />
+                    <ComboBoxItem Content="Contratado" />
+                </ComboBox>
+                <Button
+                    x:Name="BotonAplicar"
+                    Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    Click="AplicarEstado_Click"
+                    Content="Cambiar estado" />
+                <Button
+                    Grid.Column="2"
+                    VerticalAlignment="Bottom"
+                    Click="LimpiarSeleccion_Click"
+                    Content="Quitar selección" />
+            <InfoBar
+                x:Name="AvisoMasivo"
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                IsClosable="True"
+                IsOpen="False" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="3" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+            <StackPanel x:Name="Grupos" Spacing="12" />
+        </ScrollViewer>
+        <TextBlock
+            x:Name="Vacio"
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="Ninguna postulación coincide con la búsqueda."
+            Visibility="Collapsed" />
+    </Grid>
+</Page>

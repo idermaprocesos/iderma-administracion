@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="IdermaAdministracion.Pages.PermisosPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Padding="28,20,28,20" ColumnSpacing="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Spacing="8">
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Permisos" />
+            <TextBlock
+                Opacity="0.8"
+                Text="Ausencias por horas o por días. Elige una persona de trabajadores o de clínica."
+                TextWrapping="Wrap" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Name="BotonTrabajadores" Click="Grupo_Click" Content="Trabajadores" Tag="trabajadores" />
+                <Button x:Name="BotonClinica" Click="Grupo_Click" Content="Clínica" Tag="clinica" />
+            </StackPanel>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+            <StackPanel x:Name="Listas" Spacing="16" />
+        </ScrollViewer>
+
+        <ScrollViewer
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalScrollBarVisibility="Disabled"
+            HorizontalScrollMode="Disabled">
+            <StackPanel x:Name="Detalle" Spacing="12" Visibility="Collapsed">
+                <TextBlock x:Name="NombrePersona" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
+                <TextBlock x:Name="CargoPersona" Opacity="0.75" TextWrapping="Wrap" />
+
+                <Border Style="{StaticResource TarjetaEstilo}">
+                    <StackPanel Spacing="12">
+                        <TextBlock FontWeight="SemiBold" Text="Registrar permiso" />
+                        <ComboBox x:Name="Tipo" Header="Duración" SelectedIndex="0" SelectionChanged="Tipo_SelectionChanged" HorizontalAlignment="Stretch">
+                            <ComboBoxItem Content="Por horas" />
+                            <ComboBoxItem Content="Por días" />
+                        </ComboBox>
+                        <CalendarDatePicker x:Name="FechaDesde" Header="Fecha" HorizontalAlignment="Stretch" />
+                        <CalendarDatePicker x:Name="FechaHasta" Header="Hasta" HorizontalAlignment="Stretch" />
+                        <Grid x:Name="BloqueHoras" ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TimePicker x:Name="HoraInicio" Header="Desde" ClockIdentifier="24HourClock" MinuteIncrement="15" />
+                            <TimePicker x:Name="HoraFin" Grid.Column="1" Header="Hasta" ClockIdentifier="24HourClock" MinuteIncrement="15" />
+                        </Grid>
+                        <ComboBox x:Name="Motivo" Header="Motivo" SelectedIndex="0" SelectionChanged="Motivo_SelectionChanged" HorizontalAlignment="Stretch">
+                            <ComboBoxItem Content="Salud" />
+                            <ComboBoxItem Content="Fallecimiento de familiar directo" />
+                            <ComboBoxItem Content="Otros" />
+                        </ComboBox>
+                        <TextBox x:Name="OtroMotivo" Header="Describe el otro motivo" Visibility="Collapsed" />
+                        <TextBox
+                            x:Name="Justificacion"
+                            Header="Justificación"
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            MinHeight="80"
+                            PlaceholderText="Qué ocurrió y por qué pide el permiso" />
+                        <TextBlock FontWeight="SemiBold" Text="Aceptaciones" />
+                        <CheckBox x:Name="AceptadoJefe" Content="Aceptado por jefe directo" />
+                        <CheckBox x:Name="AceptadoAdministracion" Content="Aceptado por administración" />
+                        <CheckBox x:Name="AceptadoRecursosHumanos" Content="Aceptado por recursos humanos" />
+                        <CheckBox x:Name="AceptadoGerencia" Content="Aceptado por gerencia" />
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Click="Guardar_Click" Content="Guardar permiso" />
+                            <Button Click="Nuevo_Click" Content="Nuevo" />
+                        </StackPanel>
+                        <InfoBar x:Name="Aviso" IsClosable="True" IsOpen="False" />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Permisos registrados" />
+                <StackPanel x:Name="Historial" Spacing="8" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

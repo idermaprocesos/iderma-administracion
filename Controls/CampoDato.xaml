@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<UserControl
+    x:Class="IdermaAdministracion.Controls.CampoDato"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel Margin="0,0,0,14" Spacing="2">
+        <TextBlock
+            x:Name="EtiquetaTexto"
+            FontSize="12"
+            Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+        <TextBlock
+            x:Name="ValorTexto"
+            FontSize="15"
+            TextWrapping="Wrap" />
+    </StackPanel>
+</UserControl>
